@@ -125,7 +125,7 @@ header.major {
 
 header.major h2 {
 	font-size: 3em;
-	color: rgb(6, 23, 48);
+	color: white;
 }
 
 header.major p {
@@ -477,11 +477,11 @@ body.landing #header {
 }
 
 .banner2 {
-	background: url("../images/worldMap.png");
+	background: url("../images/worldMap.jpg");
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
-	color: black;
+	color: white;
 	padding: 16em 0em 14em;
 	text-align: center;
 }
@@ -665,4 +665,5 @@ body.landing #header {
 	width: 18rem;
 	display: inline-block;
 	margin: 5px;
+	color:black;
 }

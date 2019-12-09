@@ -42,7 +42,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.anonymous().and().authorizeRequests().anyRequest().authenticated().and()
         .formLogin().loginPage("/login").failureUrl("/login?error=true")
-                .defaultSuccessUrl("/home/index")
+                .defaultSuccessUrl("/index")
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .and().logout()
