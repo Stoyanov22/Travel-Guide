@@ -6,6 +6,8 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -66,7 +68,30 @@ public class TripController {
         tripService.createTrip(trip);
         List<Trip> trips = tripService.findByUserId(user.getId());
         model.addObject("trip", new ArrayList<>(trips));
-        model.setViewName("trip/trips");
+        model.setViewName("home/index");
+        return model;
+    }
+
+    @RequestMapping(value = {"/editTrip/{id}"}, method = RequestMethod.GET)
+    public ModelAndView editTrip(@PathVariable(value="id") int id) {
+        ModelAndView model = new ModelAndView();
+        List<Country> countries = countryService.findAll();
+        Trip trip = tripService.getTrip(id);
+        model.addObject("countries", countries);
+        model.addObject("trip", trip);
+        model.setViewName("trip/editTrip");
+        return model;
+    }
+
+    @RequestMapping(value = {"/editTrip/{id}"}, method = RequestMethod.POST)
+    public ModelAndView editTrip(@Valid Trip trip, @PathVariable(value="id") int id, @RequestParam("countryId") String countryId ) {
+        ModelAndView model = new ModelAndView();
+        int countryIdInt = Integer.parseInt(countryId);
+        Country country = countryService.findById(countryIdInt);
+        trip.setCountry(country);
+        trip.setId(id);
+        tripService.updateTrip(trip);
+        model.setViewName("home/index");
         return model;
     }
 

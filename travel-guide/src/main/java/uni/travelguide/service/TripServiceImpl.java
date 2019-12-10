@@ -3,6 +3,7 @@ package uni.travelguide.service;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import uni.travelguide.model.Trip;
 import uni.travelguide.repository.TripRepository;
@@ -28,29 +29,6 @@ public class TripServiceImpl implements TripService {
 
     @Transactional
     public List<Trip> findByUserId(long userId) {
-        return getTripsByUserId(userId);
-    }
-
-    @Override
-    public void createTrip(Trip trip) {
-        tripRepository.save(trip);
-    }
-
-    @Override
-    public Trip getTrip(int tripId) {
-        return tripRepository.getOne(tripId);
-    }
-
-    @Override
-    public void updateTrip(int tripId) {
-    }
-
-    @Override
-    public void removeTrip(int tripId) {
-        tripRepository.deleteById(tripId);
-    }
-
-    private List<Trip> getTripsByUserId(long userId){
         Query q = entityManager.createNativeQuery("SELECT T.ID, T.NAME, T.COUNTRY_ID, T.USER_ID FROM TRIP T WHERE user_id=?1");
         q.setParameter(1, userId);
         List<Object> results = q.getResultList();
@@ -67,4 +45,28 @@ public class TripServiceImpl implements TripService {
         return trips;
     }
 
+    @Override
+    public void createTrip(Trip trip) {
+        tripRepository.save(trip);
+    }
+
+    @Override
+    public Trip getTrip(int tripId) {
+        return tripRepository.findById(tripId).get();
+    }
+
+    @Override
+    @Transactional
+    public void updateTrip(Trip trip) {
+        Query q = entityManager.createNativeQuery("update Trip t set t.name=?1, t.country_id=?2 where t.id=?3");
+        q.setParameter(1, trip.getName());
+        q.setParameter(2, trip.getCountry().getId());
+        q.setParameter(3, trip.getId());
+        q.executeUpdate();
+    }
+
+    @Override
+    public void removeTrip(int tripId) {
+        tripRepository.deleteById(tripId);
+    }
 }

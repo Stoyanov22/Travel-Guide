@@ -11,7 +11,7 @@ public interface TripService {
 
     Trip getTrip(int tripId);
 
-    void updateTrip(int tripId);
+    void updateTrip(Trip trip);
 
     void removeTrip(int tripId);
 }
