@@ -95,6 +95,17 @@ public class TripController {
         return model;
     }
 
+    @RequestMapping(value = {"/deleteTrip/{id}"}, method = RequestMethod.GET)
+    public ModelAndView deleteTrip(@PathVariable(value="id") int id) {
+        ModelAndView model = new ModelAndView();
+        Trip trip = tripService.getTrip(id);
+        if(trip.getUser().getEmail().equals(getCurrentUserEmail())){
+            tripService.removeTrip(id);
+        }
+        model.setViewName("home/index");
+        return model;
+    }
+
     private String getCurrentUserEmail(){
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();
