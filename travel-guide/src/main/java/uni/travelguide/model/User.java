@@ -1,6 +1,8 @@
 package uni.travelguide.model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -9,7 +11,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private long id;
 
     @Column(name = "email")
     private String email;
@@ -26,11 +28,14 @@ public class User {
     @Column(name = "active")
     private int active;
 
-    @ManyToMany(cascade=CascadeType.ALL)
-    @JoinTable(name="user_role", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_ide"))
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_ide"))
     private Set<Role> roles;
 
-    public int getId() {
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    private List<Trip> trips = new ArrayList<>();
+
+    public long getId() {
         return id;
     }
 
@@ -80,5 +85,13 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Trip> getTrips() {
+        return trips;
+    }
+
+    public void setTrips(List<Trip> trips) {
+        this.trips = trips;
     }
 }

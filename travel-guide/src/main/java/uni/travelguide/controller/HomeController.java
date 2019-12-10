@@ -16,7 +16,7 @@ public class HomeController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value= {"/index"}, method=RequestMethod.GET)
+    @RequestMapping(value= {"/", "/index"}, method=RequestMethod.GET)
     public ModelAndView home() {
         ModelAndView model = new ModelAndView();
         model.setViewName("home/index");
