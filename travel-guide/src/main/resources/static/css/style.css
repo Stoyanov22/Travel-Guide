@@ -437,6 +437,11 @@ body.landing #header {
 	right: 0;
 }
 
+.home:hover {
+    color:white;
+    text-decoration:none;
+}
+
 /* Banner */
 
 #banner {
@@ -666,4 +671,16 @@ body.landing #header {
 	display: inline-block;
 	margin: 5px;
 	color:black;
+}
+
+@media only screen and (max-width: 920px) {
+  .home {
+    display: none;
+  }
+}
+
+@media only screen and (min-width: 920px) {
+  .home {
+    display: relative;
+  }
 }
