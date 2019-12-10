@@ -6,7 +6,6 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,9 +19,8 @@ import uni.travelguide.service.TripService;
 import uni.travelguide.service.UserService;
 
 import javax.validation.Valid;
-import java.util.List;
-
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class TripController {
@@ -103,6 +101,16 @@ public class TripController {
             tripService.removeTrip(id);
         }
         model.setViewName("home/index");
+        return model;
+    }
+
+    @RequestMapping(value = {"/searchResult"}, method = RequestMethod.POST)
+    public ModelAndView search(@RequestParam("searchInput") String searchInput ) {
+        ModelAndView model = new ModelAndView();
+        User user = userService.findUserByEmail(getCurrentUserEmail());
+        List<Trip> trips = tripService.searchByName(searchInput, user.getId());
+        model.addObject("trips", new ArrayList<>(trips));
+        model.setViewName("trip/searchResult");
         return model;
     }
 

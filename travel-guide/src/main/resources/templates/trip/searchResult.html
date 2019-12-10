@@ -2,17 +2,9 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>My Trips</title>
+    <title>Search Results</title>
 </head>
 <body>
-<a th:href="@{/createTrip}">Add New Trip</a>
-
-<form method="post" th:action="@{/searchResult}">
-    <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Search trip...">
-    <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Search</button>
-</form>
-
-
 <ul th:each="trip : ${trips}">
     <li th:text="${trip.name}"></li>
     <li th:text="${trip.country.name}"></li>

@@ -14,4 +14,6 @@ public interface TripService {
     void updateTrip(Trip trip);
 
     void removeTrip(int tripId);
+
+    List<Trip> searchByName(String text, long userId);
 }
