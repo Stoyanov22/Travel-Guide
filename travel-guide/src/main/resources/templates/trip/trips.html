@@ -3,22 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>My Trips</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
-<body>
-<a th:href="@{/createTrip}">Add New Trip</a>
 
-<form method="post" th:action="@{/searchResult}">
-    <input type="text" class="form-control" id="searchInput" name="searchInput" placeholder="Search trip...">
-    <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Search</button>
-</form>
+<body class="landing">
+<!-- Header -->
+<header id="header">
+    <h1><a class="contrast-blue" href="index">Countries Info API</a></h1>
+    <nav class="nav">
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="about">About</a></li>
+            <li><a href="api">API</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/trips}">Trips</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
+            <li sec:authorize="isAuthenticated()"><span
+                    th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/login}">Log in</a></li>
+            <li sec:authorize="isAnonymous()"><a th:href="@{/signup}">Register</a></li>
+        </ul>
+    </nav>
+</header>
 
+<!-- Main -->
+<section id="main" class="wrapper banner2">
+    <div class="container">
+        <a th:href="@{/createTrip}">Add New Trip</a>
 
-<ul th:each="trip : ${trips}">
-    <li th:text="${trip.name}"></li>
-    <li th:text="${trip.country.name}"></li>
-    <li><a th:href="@{'/editTrip/' + ${trip.id}}">Edit</a></li>
-    <li><a th:href="@{'/deleteTrip/' + ${trip.id}}">Delete</a></li>
-    <hr>
-</ul>
+        <form method="post" th:action="@{/searchResult}">
+            <div class="row">
+                <input type="text" class="form-control" id="searchInput" name="searchInput"
+                       placeholder="Search trip...">
+                <button type="submit" class="btn btn-success"><i class=""></i> Search</button>
+            </div>
+        </form>
+
+        <div class="card" th:each="trip : ${trips}">
+            <div class="card-body">
+                <h3 th:text="${trip.name}"></h3>
+                <p th:text="${trip.country.name}"></p>
+                <p><a th:href="@{'/editTrip/' + ${trip.id}}">Edit</a></p>
+                <p><a th:href="@{'/deleteTrip/' + ${trip.id}}">Delete</a></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer id="footer">
+    <ul class="copyright">
+        <li>Iliyan Stoyanov #22</li>
+        <li><a href="iliyan.stoyanov.22@gmail.com">iliyan.stoyanov.22@gmail.com</a></li>
+        <li>&copy; All rights reserved.</li>
+    </ul>
+</footer>
 </body>
 </html>
