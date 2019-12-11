@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Countries Info API</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+
+<body class="landing">
+    <!-- Header -->
+    <header id="header">
+        <h1><a class="contrast-blue" href="index">Countries Info API</a></h1>
+        <nav class="nav">
+            <ul>
+                <li><a href="index">Home</a></li>
+                <li><a href="about">About</a></li>
+                <li><a href="api">API</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/trips}">Trips</a></li>
+                <li sec:authorize="isAuthenticated()">  <a th:href="@{/logout}">Log out</a></li>
+                <li sec:authorize="isAuthenticated()"> <span th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
+                <li sec:authorize="isAnonymous()">  <a th:href="@{/login}">Log in</a></li>
+                <li sec:authorize="isAnonymous()">  <a th:href="@{/signup}">Register</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <section id="main" class="wrapper banner2">
+        <div class="container">
+            <header class="major">
+                <h2>Countries API</h2>
+                <input type="submit" id="change-ui" value="Change UI">
+            </header>
+            <div id="layout-one">
+                <div class="layout-one-input">
+                    <input type="submit" id="choose-country" value="Choose Country">
+                    <div id="myCountryMenu" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="myInput">
+                        <a class="country-list" href="#">Afghanistan</a>
+                        <a class="country-list" href="#">Åland Islands</a>
+                        <a class="country-list" href="#">Albania</a>
+                        <a class="country-list" href="#">Algeria</a>
+                        <a class="country-list" href="#">American Samoa</a>
+                        <a class="country-list" href="#">Andorra</a>
+                        <a class="country-list" href="#">Angola</a>
+                        <a class="country-list" href="#">Anguilla</a>
+                        <a class="country-list" href="#">Antarctica</a>
+                        <a class="country-list" href="#">Antigua and Barbuda</a>
+                        <a class="country-list" href="#">Argentina</a>
+                        <a class="country-list" href="#">Armenia</a>
+                        <a class="country-list" href="#">Aruba</a>
+                        <a class="country-list" href="#">Australia</a>
+                        <a class="country-list" href="#">Austria</a>
+                        <a class="country-list" href="#">Azerbaijan</a>
+                        <a class="country-list" href="#">Bahamas</a>
+                        <a class="country-list" href="#">Bahrain</a>
+                        <a class="country-list" href="#">Bangladesh</a>
+                        <a class="country-list" href="#">Barbados</a>
+                        <a class="country-list" href="#">Belarus</a>
+                        <a class="country-list" href="#">Belgium</a>
+                        <a class="country-list" href="#">Belize</a>
+                        <a class="country-list" href="#">Benin</a>
+                        <a class="country-list" href="#">Bermuda</a>
+                        <a class="country-list" href="#">Bhutan</a>
+                        <a class="country-list" href="#">Bolivia</a>
+                        <a class="country-list" href="#">Bonaire</a>
+                        <a class="country-list" href="#">Bosnia and Herzegovina</a>
+                        <a class="country-list" href="#">Botswana</a>
+                        <a class="country-list" href="#">Bouvet Island</a>
+                        <a class="country-list" href="#">Brazil</a>
+                        <a class="country-list" href="#">British Indian Ocean Territory</a>
+                        <a class="country-list" href="#">United States Minor Outlying Islands</a>
+                        <a class="country-list" href="#">Virgin Islands (British)</a>
+                        <a class="country-list" href="#">Virgin Islands (U.S.)</a>
+                        <a class="country-list" href="#">Brunei Darussalam</a>
+                        <a class="country-list" href="#">Bulgaria</a>
+                        <a class="country-list" href="#">Burkina Faso</a>
+                        <a class="country-list" href="#">Burundi</a>
+                        <a class="country-list" href="#">Cambodia</a>
+                        <a class="country-list" href="#">Cameroon</a>
+                        <a class="country-list" href="#">Canada</a>
+                        <a class="country-list" href="#">Cabo Verde</a>
+                        <a class="country-list" href="#">Cayman Islands</a>
+                        <a class="country-list" href="#">Central African Republic</a>
+                        <a class="country-list" href="#">Chad</a>
+                        <a class="country-list" href="#">Chile</a>
+                        <a class="country-list" href="#">China</a>
+                        <a class="country-list" href="#">Christmas Island</a>
+                        <a class="country-list" href="#">Cocos Islands</a>
+                        <a class="country-list" href="#">Colombia</a>
+                        <a class="country-list" href="#">Comoros</a>
+                        <a class="country-list" href="#">Congo</a>
+                        <a class="country-list" href="#">Cook Islands</a>
+                        <a class="country-list" href="#">Costa Rica</a>
+                        <a class="country-list" href="#">Croatia</a>
+                        <a class="country-list" href="#">Cuba</a>
+                        <a class="country-list" href="#">Curaçao</a>
+                        <a class="country-list" href="#">Cyprus</a>
+                        <a class="country-list" href="#">Czech Republic</a>
+                        <a class="country-list" href="#">Denmark</a>
+                        <a class="country-list" href="#">Djibouti</a>
+                        <a class="country-list" href="#">Dominica</a>
+                        <a class="country-list" href="#">Dominican Republic</a>
+                        <a class="country-list" href="#">Ecuador</a>
+                        <a class="country-list" href="#">Egypt</a>
+                        <a class="country-list" href="#">El Salvador</a>
+                        <a class="country-list" href="#">Equatorial Guinea</a>
+                        <a class="country-list" href="#">Eritrea</a>
+                        <a class="country-list" href="#">Estonia</a>
+                        <a class="country-list" href="#">Ethiopia</a>
+                        <a class="country-list" href="#">Falkland Islands</a>
+                        <a class="country-list" href="#">Faroe Islands</a>
+                        <a class="country-list" href="#">Fiji</a>
+                        <a class="country-list" href="#">Finland</a>
+                        <a class="country-list" href="#">France</a>
+                        <a class="country-list" href="#">French Guiana</a>
+                        <a class="country-list" href="#">French Polynesia</a>
+                        <a class="country-list" href="#">French Southern Territories</a>
+                        <a class="country-list" href="#">Gabon</a>
+                        <a class="country-list" href="#">Gambia</a>
+                        <a class="country-list" href="#">Georgia</a>
+                        <a class="country-list" href="#">Germany</a>
+                        <a class="country-list" href="#">Ghana</a>
+                        <a class="country-list" href="#">Gibraltar</a>
+                        <a class="country-list" href="#">Greece</a>
+                        <a class="country-list" href="#">Greenland</a>
+                        <a class="country-list" href="#">Grenada</a>
+                        <a class="country-list" href="#">Guadeloupe</a>
+                        <a class="country-list" href="#">Guam</a>
+                        <a class="country-list" href="#">Guatemala</a>
+                        <a class="country-list" href="#">Guernsey</a>
+                        <a class="country-list" href="#">Guinea</a>
+                        <a class="country-list" href="#">Guinea-Bissau</a>
+                        <a class="country-list" href="#">Guyana</a>
+                        <a class="country-list" href="#">Haiti</a>
+                        <a class="country-list" href="#">Heard Island and McDonald Islands</a>
+                        <a class="country-list" href="#">Holy See</a>
+                        <a class="country-list" href="#">Honduras</a>
+                        <a class="country-list" href="#">Hong Kong</a>
+                        <a class="country-list" href="#">Hungary</a>
+                        <a class="country-list" href="#">Iceland</a>
+                        <a class="country-list" href="#">India</a>
+                        <a class="country-list" href="#">Indonesia</a>
+                        <a class="country-list" href="#">Côte d'Ivoire</a>
+                        <a class="country-list" href="#">Iran</a>
+                        <a class="country-list" href="#">Iraq</a>
+                        <a class="country-list" href="#">Ireland</a>
+                        <a class="country-list" href="#">Isle of Man</a>
+                        <a class="country-list" href="#">Israel</a>
+                        <a class="country-list" href="#">Italy</a>
+                        <a class="country-list" href="#">Jamaica</a>
+                        <a class="country-list" href="#">Japan</a>
+                        <a class="country-list" href="#">Jersey</a>
+                        <a class="country-list" href="#">Jordan</a>
+                        <a class="country-list" href="#">Kazakhstan</a>
+                        <a class="country-list" href="#">Kenya</a>
+                        <a class="country-list" href="#">Kiribati</a>
+                        <a class="country-list" href="#">Kuwait</a>
+                        <a class="country-list" href="#">Kyrgyzstan</a>
+                        <a class="country-list" href="#">Lao People's Democratic Republic</a>
+                        <a class="country-list" href="#">Latvia</a>
+                        <a class="country-list" href="#">Lebanon</a>
+                        <a class="country-list" href="#">Lesotho</a>
+                        <a class="country-list" href="#">Liberia</a>
+                        <a class="country-list" href="#">Libya</a>
+                        <a class="country-list" href="#">Liechtenstein</a>
+                        <a class="country-list" href="#">Lithuania</a>
+                        <a class="country-list" href="#">Luxembourg</a>
+                        <a class="country-list" href="#">Macao</a>
+                        <a class="country-list" href="#">Macedonia</a>
+                        <a class="country-list" href="#">Madagascar</a>
+                        <a class="country-list" href="#">Malawi</a>
+                        <a class="country-list" href="#">Malaysia</a>
+                        <a class="country-list" href="#">Maldives</a>
+                        <a class="country-list" href="#">Mali</a>
+                        <a class="country-list" href="#">Malta</a>
+                        <a class="country-list" href="#">Marshall Islands</a>
+                        <a class="country-list" href="#">Martinique</a>
+                        <a class="country-list" href="#">Mauritania</a>
+                        <a class="country-list" href="#">Mauritius</a>
+                        <a class="country-list" href="#">Mayotte</a>
+                        <a class="country-list" href="#">Mexico</a>
+                        <a class="country-list" href="#">Micronesia</a>
+                        <a class="country-list" href="#">Moldova</a>
+                        <a class="country-list" href="#">Monaco</a>
+                        <a class="country-list" href="#">Mongolia</a>
+                        <a class="country-list" href="#">Montenegro</a>
+                        <a class="country-list" href="#">Montserrat</a>
+                        <a class="country-list" href="#">Morocco</a>
+                        <a class="country-list" href="#">Mozambique</a>
+                        <a class="country-list" href="#">Myanmar</a>
+                        <a class="country-list" href="#">Namibia</a>
+                        <a class="country-list" href="#">Nauru</a>
+                        <a class="country-list" href="#">Nepal</a>
+                        <a class="country-list" href="#">Netherlands</a>
+                        <a class="country-list" href="#">New Caledonia</a>
+                        <a class="country-list" href="#">New Zealand</a>
+                        <a class="country-list" href="#">Nicaragua</a>
+                        <a class="country-list" href="#">Niger</a>
+                        <a class="country-list" href="#">Nigeria</a>
+                        <a class="country-list" href="#">Niue</a>
+                        <a class="country-list" href="#">Norfolk Island</a>
+                        <a class="country-list" href="#">Korea</a>
+                        <a class="country-list" href="#">Northern Mariana Islands</a>
+                        <a class="country-list" href="#">Norway</a>
+                        <a class="country-list" href="#">Oman</a>
+                        <a class="country-list" href="#">Pakistan</a>
+                        <a class="country-list" href="#">Palau</a>
+                        <a class="country-list" href="#">Palestine</a>
+                        <a class="country-list" href="#">Panama</a>
+                        <a class="country-list" href="#">Papua New Guinea</a>
+                        <a class="country-list" href="#">Paraguay</a>
+                        <a class="country-list" href="#">Peru</a>
+                        <a class="country-list" href="#">Philippines</a>
+                        <a class="country-list" href="#">Pitcairn</a>
+                        <a class="country-list" href="#">Poland</a>
+                        <a class="country-list" href="#">Portugal</a>
+                        <a class="country-list" href="#">Puerto Rico</a>
+                        <a class="country-list" href="#">Qatar</a>
+                        <a class="country-list" href="#">Republic of Kosovo</a>
+                        <a class="country-list" href="#">Réunion</a>
+                        <a class="country-list" href="#">Romania</a>
+                        <a class="country-list" href="#">Russian Federation</a>
+                        <a class="country-list" href="#">Rwanda</a>
+                        <a class="country-list" href="#">Saint Barthélemy</a>
+                        <a class="country-list" href="#">Saint Helena</a>
+                        <a class="country-list" href="#">Saint Kitts and Nevis</a>
+                        <a class="country-list" href="#">Saint Lucia</a>
+                        <a class="country-list" href="#">Saint Martin</a>
+                        <a class="country-list" href="#">Saint Pierre and Miquelon</a>
+                        <a class="country-list" href="#">Saint Vincent and the Grenadines</a>
+                        <a class="country-list" href="#">Samoa</a>
+                        <a class="country-list" href="#">San Marino</a>
+                        <a class="country-list" href="#">Sao Tome and Principe</a>
+                        <a class="country-list" href="#">Saudi Arabia</a>
+                        <a class="country-list" href="#">Senegal</a>
+                        <a class="country-list" href="#">Serbia</a>
+                        <a class="country-list" href="#">Seychelles</a>
+                        <a class="country-list" href="#">Sierra Leone</a>
+                        <a class="country-list" href="#">Singapore</a>
+                        <a class="country-list" href="#">Sint Maarten</a>
+                        <a class="country-list" href="#">Slovakia</a>
+                        <a class="country-list" href="#">Slovenia</a>
+                        <a class="country-list" href="#">Solomon Islands</a>
+                        <a class="country-list" href="#">Somalia</a>
+                        <a class="country-list" href="#">South Africa</a>
+                        <a class="country-list" href="#">South Georgia and the South Sandwich Islands</a>
+                        <a class="country-list" href="#">Korea</a>
+                        <a class="country-list" href="#">South Sudan</a>
+                        <a class="country-list" href="#">Spain</a>
+                        <a class="country-list" href="#">Sri Lanka</a>
+                        <a class="country-list" href="#">Sudan</a>
+                        <a class="country-list" href="#">Svalbard and Jan Mayen</a>
+                        <a class="country-list" href="#">Swaziland</a>
+                        <a class="country-list" href="#">Sweden</a>
+                        <a class="country-list" href="#">Switzerland</a>
+                        <a class="country-list" href="#">Syrian Arab Republic</a>
+                        <a class="country-list" href="#">Taiwan</a>
+                        <a class="country-list" href="#">Tajikistan</a>
+                        <a class="country-list" href="#">Tanzania</a>
+                        <a class="country-list" href="#">Thailand</a>
+                        <a class="country-list" href="#">Timor-Leste</a>
+                        <a class="country-list" href="#">Togo</a>
+                        <a class="country-list" href="#">Tokelau</a>
+                        <a class="country-list" href="#">Tonga</a>
+                        <a class="country-list" href="#">Trinidad and Tobago</a>
+                        <a class="country-list" href="#">Tunisia</a>
+                        <a class="country-list" href="#">Turkey</a>
+                        <a class="country-list" href="#">Turkmenistan</a>
+                        <a class="country-list" href="#">Turks and Caicos Islands</a>
+                        <a class="country-list" href="#">Tuvalu</a>
+                        <a class="country-list" href="#">Uganda</a>
+                        <a class="country-list" href="#">Ukraine</a>
+                        <a class="country-list" href="#">United Arab Emirates</a>
+                        <a class="country-list" href="#">United Kingdom of Great Britain and Northern Ireland</a>
+                        <a class="country-list" href="#">United States of America</a>
+                        <a class="country-list" href="#">Uruguay</a>
+                        <a class="country-list" href="#">Uzbekistan</a>
+                        <a class="country-list" href="#">Vanuatu</a>
+                        <a class="country-list" href="#">Venezuela</a>
+                        <a class="country-list" href="#">Viet Nam</a>
+                        <a class="country-list" href="#">Wallis and Futuna</a>
+                        <a class="country-list" href="#">Western Sahara</a>
+                        <a class="country-list" href="#">Yemen</a>
+                        <a class="country-list" href="#">Zambia</a>
+                        <a class="country-list" href="#">Zimbabwe</a>
+                    </div>
+                </div>
+            </div>
+            <div id="layout-two">
+                <h3>Get Countries by</h3>
+                <ul class="actions">
+                    <li class="button api-button" id="get-by-name">Name</li>
+                    <li class="button api-button" id="get-by-language">Language</li>
+                    <li class="button api-button" id="get-by-currency">Currency</li>
+                </ul>
+                <input type="text" name="inputText" id="criteria" value="" placeholder="Criteria" />
+                </br>
+            </div>
+                
+            <!-- API results -->
+            <div id="api-results">
+                <h3>Results:</h3>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <ul class="copyright">
+            <li>Iliyan Stoyanov #22</li>
+            <li><a href="iliyan.stoyanov.22@gmail.com">iliyan.stoyanov.22@gmail.com</a></li>
+            <li>&copy; All rights reserved.</li>
+        </ul>
+    </footer>
+    <script src="/js/script.js"></script>
+</body>
+
+</html>
