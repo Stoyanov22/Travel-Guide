@@ -33,27 +33,48 @@
 <!-- Main -->
 <section id="main" class="wrapper banner2">
     <div class="container">
-        <a th:href="@{/createTrip}">Add New Trip</a>
-
-        <form method="post" th:action="@{/searchResult}">
+        <div id="createTrip">
             <div class="row">
-                <input type="text" class="form-control" id="searchInput" name="searchInput"
-                       placeholder="Search trip...">
-                <button type="submit" class="btn btn-success"><i class=""></i> Search</button>
+                <div class="col-md-3 field-label-responsive">
+                    <label for="name">Name</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
+                            <input type="text" name="name" class="form-control" id="tripName"
+                                   placeholder="Trip name" required autofocus>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </form>
+            <div class="row">
+                <div class="col-md-3 field-label-responsive">
+                    <label for="country">Country</label>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
-        <div class="card" th:each="trip : ${trips}">
-            <div class="card-body">
-                <h3 th:text="${trip.name}"></h3>
-                <p th:text="${trip.country.name}"></p>
-                <p><a th:href="@{'/editTrip/' + ${trip.id}}">Edit</a></p>
-                <p><a th:href="@{'/deleteTrip/' + ${trip.id}}">Delete</a></p>
+                            <select id="countryId" name="countryId">
+                                <option th:each="country : ${countries}" th:value="${country.id}"
+                                        th:text="${country.name}"></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <button type="submit" id="createTripBtn" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+        </div>
+        <div id="restTrips">
+
         </div>
     </div>
 </section>
-
 <!-- Footer -->
 <footer id="footer">
     <ul class="copyright">
@@ -62,5 +83,7 @@
         <li>&copy; All rights reserved.</li>
     </ul>
 </footer>
+
+<script src="/js/rest.js"></script>
 </body>
 </html>

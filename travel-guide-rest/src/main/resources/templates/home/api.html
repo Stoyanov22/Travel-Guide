@@ -20,6 +20,7 @@
                 <li><a href="about">About</a></li>
                 <li><a href="api">API</a></li>
                 <li sec:authorize="isAuthenticated()"><a th:href="@{/trips}">Trips</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/rest}">Rest</a></li>
                 <li sec:authorize="isAuthenticated()">  <a th:href="@{/logout}">Log out</a></li>
                 <li sec:authorize="isAuthenticated()"> <span th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
                 <li sec:authorize="isAnonymous()">  <a th:href="@{/login}">Log in</a></li>
