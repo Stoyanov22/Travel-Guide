@@ -5,7 +5,6 @@
     <title>Create trip</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </head>
@@ -55,18 +54,19 @@
                     <div class="form-group">
                         <div class="input-group mb-2 mr-sm-2 mb-sm-0">
 
-                            <select name="countryId">
-                                <option th:each="country : ${countries}" th:value="${country.id}"
+                            <select name="countryId" class="select-content">
+                                <option th:each="country : ${countries}" th:value="${country.id}" class="option-content"
                                         th:text="${country.name}"></option>
                             </select>
                         </div>
                     </div>
                 </div>
             </div>
+            <br><br>
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
-                    <button type="submit" class="btn btn-success"><i class="fa fa-user-plus"></i> Create</button>
+                    <button type="submit" class="btn btn-success">Create</button>
                 </div>
             </div>
         </form>

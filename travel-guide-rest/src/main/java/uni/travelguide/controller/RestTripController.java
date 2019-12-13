@@ -63,6 +63,17 @@ public class RestTripController {
         }
     }
 
+    @GetMapping(path = "/rest/editTrip")
+    public Trip editTrip(@RequestParam(value = "id") String id){
+        try{
+            Trip trip = tripService.getTrip(Integer.valueOf(id));
+            return trip;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
     @PostMapping(path = "/rest/editTrip")
     public int editTrip(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "countryId") String countryId){
         try{

@@ -1,6 +1,7 @@
 package uni.travelguide.model;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "trip")
@@ -8,7 +9,7 @@ import javax.persistence.*;
 //        @ConstructorResult(targetClass = Trip.class,
 //                columns = {@ColumnResult(name="id"), @ColumnResult(name="name"), @ColumnResult(name="country_id"), @ColumnResult(name="user_id")})
 //})
-public class Trip {
+public class Trip implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
