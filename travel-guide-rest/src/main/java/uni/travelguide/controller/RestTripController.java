@@ -5,10 +5,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uni.travelguide.model.Country;
 import uni.travelguide.model.Trip;
@@ -42,7 +39,7 @@ public class RestTripController {
     }
 
     @GetMapping(path = "/rest/getTrips")
-    public List<Trip> getTrips(HttpSession session) {
+    public @ResponseBody List<Trip> getTrips(HttpSession session) {
         User user = userService.findUserByEmail(getCurrentUserEmail());
         List<Trip> trips = tripService.findByUserId(user.getId());
         return trips;
@@ -58,7 +55,37 @@ public class RestTripController {
             trip.setCountry(country);
             User user = userService.findUserByEmail(getCurrentUserEmail());
             trip.setUser(user);
-            tripService.createTrip(trip);
+            trip = tripService.createTrip(trip);
+            return trip.getId();
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+
+    @PostMapping(path = "/rest/editTrip")
+    public int editTrip(@RequestParam(value = "id") String id, @RequestParam(value = "name") String name, @RequestParam(value = "countryId") String countryId){
+        try{
+            Trip trip = tripService.getTrip(Integer.parseInt(id));
+            trip.setName(name);
+            int countryIdInt = Integer.parseInt(countryId);
+            Country country = countryService.findById(countryIdInt);
+            trip.setCountry(country);
+            tripService.updateTrip(trip);
+            return 1;
+        }
+        catch (Exception e){
+            return 0;
+        }
+    }
+
+    @PostMapping(path = "/rest/deleteTrip")
+    public int deleteTrip(@RequestParam(value = "id") String id){
+        try{
+            Trip trip = tripService.getTrip(Integer.valueOf(id));
+            if(trip.getUser().getEmail().equals(getCurrentUserEmail())){
+                tripService.removeTrip(Integer.valueOf(id));
+            }
             return 1;
         }
         catch (Exception e){

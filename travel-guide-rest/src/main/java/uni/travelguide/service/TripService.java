@@ -7,7 +7,7 @@ public interface TripService {
 
     List<Trip> findByUserId(long id);
 
-    void createTrip(Trip trip);
+    Trip createTrip(Trip trip);
 
     Trip getTrip(int tripId);
 

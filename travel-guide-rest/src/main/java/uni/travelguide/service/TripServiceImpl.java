@@ -37,8 +37,8 @@ public class TripServiceImpl implements TripService {
     }
 
     @Override
-    public void createTrip(Trip trip) {
-        tripRepository.save(trip);
+    public Trip createTrip(Trip trip) {
+        return tripRepository.save(trip);
     }
 
     @Override

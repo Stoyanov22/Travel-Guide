@@ -673,14 +673,35 @@ body.landing #header {
 	color:black;
 }
 
+#editTrip {
+    display: none;
+}
+
+.select-content{
+	background-color: rgba(144, 144, 144, 0.075);
+	position: absolute;
+	align-content: center;
+	overflow: auto;
+	border: 1px solid rgb(140, 182, 236);
+	z-index: 1;
+	border-radius: 7px;
+}
+
+.option-content{
+	background-color: rgba(140, 182, 236, 0.75);
+	color: black;
+	padding: 12px 16px;
+	text-decoration: none;
+}
+
 @media only screen and (max-width: 920px) {
-  .home {
+  .contrast-blue {
     display: none;
   }
 }
 
 @media only screen and (min-width: 920px) {
-  .home {
+  .contrast-blue {
     display: relative;
   }
 }
