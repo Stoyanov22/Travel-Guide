@@ -117,6 +117,7 @@
                 </div>
             </div>
         </div>
+        
         <div id="trips">
             <br><br>
             <h2>My Trips</h2>
@@ -125,11 +126,19 @@
                        placeholder="Search trip...">
                 <button type="submit" id="search-input-btn" class="btn btn-primary col-md-3">Search</button>
             </div>
-            <br><br>
-            <div id="restTrips">
-
+            <div class="row">
+                <select id="searchSelect" name="countryId">
+                    <option value="0">Search By Country</option>
+                    <option th:each="country : ${countries}" th:value="${country.id}" class="option-content"
+                            th:text="${country.name}"></option>
+                </select>
             </div>
         </div>
+        <br><br>
+        <div id="restTrips">
+
+        </div>
+    </div>
     </div>
 </section>
 <!-- Footer -->

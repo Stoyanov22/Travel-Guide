@@ -127,6 +127,33 @@ $(document).ready(function () {
 				} else {
 					$('#restTrips').empty();
 					data.forEach(function (trip) {
+						searchSelect = document.getElementById("searchSelect").value = "0";
+						createTripCard(trip.id, trip.name, trip.country.name);
+					});
+				}
+			},
+			error: function (err) {
+				alert(err);
+			}
+		});
+	});
+
+	$('#searchSelect').on('change', function() {
+		searchInput = document.getElementById("search-input").value;
+		searchSelect = document.getElementById("searchSelect").value;
+		$.ajax({
+			url: "/rest/searchWithCountry",
+			method: "POST",
+			data: {
+				input: searchInput,
+				select: searchSelect
+			},
+			success: function (data) {
+				if (data == null) {
+					alert("Deleting Trip failed");
+				} else {
+					$('#restTrips').empty();
+					data.forEach(function (trip) {
 						createTripCard(trip.id, trip.name, trip.country.name);
 					});
 				}

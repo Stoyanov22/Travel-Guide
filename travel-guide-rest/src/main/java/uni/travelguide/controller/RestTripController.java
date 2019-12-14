@@ -15,6 +15,7 @@ import uni.travelguide.service.TripService;
 import uni.travelguide.service.UserService;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -109,6 +110,23 @@ public class RestTripController {
         try{
             User user = userService.findUserByEmail(getCurrentUserEmail());
             List<Trip> trips = tripService.searchByName(input, user.getId());
+            return trips;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
+    @PostMapping(path = "/rest/searchWithCountry")
+    public List<Trip> search(@RequestParam(value = "input") String input, @RequestParam(value = "select") String select){
+        try{
+            User user = userService.findUserByEmail(getCurrentUserEmail());
+            List<Trip> trips = new ArrayList<>();
+            if(select != "0"){
+                trips = tripService.searchByNameAndCountry(input, select, user.getId());
+            } else {
+                trips = tripService.searchByName(input, user.getId());
+            }
             return trips;
         }
         catch (Exception e){

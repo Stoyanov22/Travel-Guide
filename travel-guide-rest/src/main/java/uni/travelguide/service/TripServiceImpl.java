@@ -71,6 +71,17 @@ public class TripServiceImpl implements TripService {
         return trips;
     }
 
+    @Override
+    public List<Trip> searchByNameAndCountry(String text, String select, long userId) {
+        Query q = entityManager.createNativeQuery("SELECT * FROM TRIP T WHERE T.NAME LIKE ?1 AND T.USER_ID=?2 AND T.COUNTRY_ID=?3");
+        q.setParameter(1, "%"+text+"%");
+        q.setParameter(2, userId);
+        q.setParameter(3, select);
+        List<Object> results = q.getResultList();
+        List<Trip> trips = convertQueryObjectToTripList(results);
+        return trips;
+    }
+
     private List<Trip> convertQueryObjectToTripList(List<Object> results){
         List<Trip> trips = new ArrayList<>();
         for(Object result : results){
