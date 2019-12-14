@@ -3,7 +3,7 @@ $(document).ready(function () {
 	var editId = 0;
 
 	$.ajax({
-		url: "http://localhost:8080/rest/getTrips",
+		url: "/rest/getTrips",
 		method: "GET",
 		success: function (data) {
 			data.forEach(function (trip) {
