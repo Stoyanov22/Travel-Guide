@@ -104,6 +104,18 @@ public class RestTripController {
         }
     }
 
+    @PostMapping(path = "/rest/search")
+    public List<Trip> search(@RequestParam(value = "input") String input){
+        try{
+            User user = userService.findUserByEmail(getCurrentUserEmail());
+            List<Trip> trips = tripService.searchByName(input, user.getId());
+            return trips;
+        }
+        catch (Exception e){
+            return null;
+        }
+    }
+
     private String getCurrentUserEmail() {
         SecurityContext securityContext = SecurityContextHolder.getContext();
         Authentication authentication = securityContext.getAuthentication();

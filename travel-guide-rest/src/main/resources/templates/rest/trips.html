@@ -19,8 +19,7 @@
             <li><a href="index">Home</a></li>
             <li><a href="about">About</a></li>
             <li><a href="api">API</a></li>
-            <li sec:authorize="isAuthenticated()"><a th:href="@{/trips}">Trips</a></li>
-            <li sec:authorize="isAuthenticated()"><a th:href="@{/rest}">Rest</a></li>
+            <li sec:authorize="isAuthenticated()"><a th:href="@{/rest}">Trips</a></li>
             <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Log out</a></li>
             <li sec:authorize="isAuthenticated()"><span
                     th:text="${#authentication.getPrincipal().getUsername()}"></span></li>
@@ -63,7 +62,7 @@
                     </div>
                 </div>
             </div>
-            <br><br>
+            <br>
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col-md-6">
@@ -71,6 +70,7 @@
                 </div>
             </div>
         </div>
+
         <div id="edit-modal" class="modal fade" role="dialog" tabindex="-1">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content">
@@ -117,9 +117,18 @@
                 </div>
             </div>
         </div>
-        <div id="restTrips">
+        <div id="trips">
+            <br><br>
             <h2>My Trips</h2>
+            <div class="row">
+                <input type="text" class="form-control col-md-9" id="search-input" name="search-input"
+                       placeholder="Search trip...">
+                <button type="submit" id="search-input-btn" class="btn btn-primary col-md-3">Search</button>
+            </div>
+            <br><br>
+            <div id="restTrips">
 
+            </div>
         </div>
     </div>
 </section>

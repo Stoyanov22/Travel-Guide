@@ -30,7 +30,7 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				if (data == 0) {
-					alert("Adding Trip error:ed");
+					alert("Adding Trip failed");
 				} else {
 					createTripCard(data, name, countryName);
 					$('#tripName').val("");
@@ -80,7 +80,7 @@ $(document).ready(function () {
 				$('#edit-modal').modal('hide');
 
 				if (data == 0) {
-					alert("Updating Trip error:ed");
+					alert("Search failed");
 				} else {
 					removeTripCard(editId);
 					createTripCard(editId, name, countryName);
@@ -102,9 +102,33 @@ $(document).ready(function () {
 			},
 			success: function (data) {
 				if (data == 0) {
-					alert("Deleting Trip error:ed");
+					alert("Deleting Trip failed");
 				} else {
 					removeTripCard(deleteId);
+				}
+			},
+			error: function (err) {
+				alert(err);
+			}
+		});
+	});
+
+	$('#search-input-btn').click(function (e) {
+		searchInput = document.getElementById("search-input").value;
+		$.ajax({
+			url: "/rest/search",
+			method: "POST",
+			data: {
+				input: searchInput
+			},
+			success: function (data) {
+				if (data == null) {
+					alert("Deleting Trip failed");
+				} else {
+					$('#restTrips').empty();
+					data.forEach(function (trip) {
+						createTripCard(trip.id, trip.name, trip.country.name);
+					});
 				}
 			},
 			error: function (err) {
